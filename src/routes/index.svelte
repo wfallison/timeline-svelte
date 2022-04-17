@@ -1,35 +1,94 @@
 <script lang="ts">
-	import Button, { Label, Icon } from '@smui/button';
+	import { articleResults, loading, uniqueTitlesAndColors } from '../stores';
+	import LinearProgress from '@smui/linear-progress';
 
-	let clicked = 0;
+	import SearchMultiple from '../components/SearchMultiple.svelte'
+	import SearchResultHeader from "../components/SearchResultHeader.svelte";
+	import Chip, { Set, LeadingIcon, Text } from '@smui/chips';
 
-	function handleClick(event: CustomEvent | MouseEvent) {
-		event = event as MouseEvent;
-		if (event.button === 0) {
-			clicked++;
-		}
+	import {
+		Timeline,
+		TimelineItem,
+		TimelineSeparator,
+		TimelineDot,
+		TimelineConnector,
+		TimelineContent,
+		TimelineOppositeContent
+	} from 'svelte-vertical-timeline';
+import { mdiRobotConfusedOutline } from '@mdi/js';
+
+	let timeLineData;
+	let titlesAndColorsData;
+	let isLoading = false;
+
+	articleResults.subscribe(value => {
+		timeLineData = value;
+	});
+
+	loading.subscribe(value => {
+		isLoading = value;
+	});
+
+	uniqueTitlesAndColors.subscribe(value => {
+		titlesAndColorsData = value;
+	})
+
+	function getColorByTitle(title){
+		const found = titlesAndColorsData.find(element => element.title === title);
+		return found.color;
 	}
 
-	function reset() {
-		clicked = 0;
-	}
 </script>
 
-<Button on:mousedown={handleClick}>
-	<Icon class="material-icons">thumb_up</Icon>
-	<Label>Click Me</Label>
-</Button>
-<p class="mdc-typography--body1">
-	{#if clicked}
-		You've clicked the button {clicked} time{clicked === 1 ? '' : 's'}. You can
-		<a on:click={reset} href="javascript:void(0);">reset it</a>.
-	{:else}
-		<span class="grayed">You haven't clicked the button.</span>
+
+	{#if isLoading == true}
+		<LinearProgress indeterminate/>
 	{/if}
-</p>
+
+	{#if timeLineData && isLoading == false}
+	<SearchResultHeader></SearchResultHeader>
+	<Timeline position="alternate" style={"margin: auto;width: 95%;}"}>
+		{#each timeLineData as option}
+			<TimelineItem>
+				<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
+					<div>
+					<p>{option.stringDate}</p>
+					</div>
+				</TimelineOppositeContent>
+				<TimelineSeparator>
+					<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}"/>
+					<TimelineConnector />
+				</TimelineSeparator>
+				<TimelineContent>
+					<h3>{option.sentence}</h3>
+						<span>
+						<!-- <Set chips={option} let:chip filter bind:selected> -->
+							<Chip chip={{}}touch style="margin-top: 10px;">
+							<LeadingIcon class="material-icons" style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon>
+							<Text>{option.articleTitle}</Text>
+							</Chip>
+							<Chip chip={{}}touch style="margin-top: 10px;">
+							<LeadingIcon class="material-icons">event</LeadingIcon>
+							<Text>{option.date}</Text>
+							</Chip>
+							{#if option.meta.sectionTitle}
+							<Chip chip={{}}touch style="max-width: 250px; margin-top: 10px;
+							overflow: hidden;">
+							<LeadingIcon class="material-icons">category</LeadingIcon>
+							<Text>{option.meta.sectionTitle}</Text>
+							</Chip>
+							{/if}
+						<!-- </Set> -->
+					</span>
+				</TimelineContent>
+			</TimelineItem>
+		{/each}
+	</Timeline>
+	{/if}
 
 <style>
 	.grayed {
 		opacity: 0.6;
 	}
+
 </style>

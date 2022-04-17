@@ -4,7 +4,7 @@
 
 // Svelte Colors!
 @use '@material/theme/index' as theme with (
-  $primary: #ff3e00,
+  $primary: #3586eb,
   $secondary: #676778,
   $surface: #fff,
   $background: #fff,
@@ -17,6 +17,7 @@ html,
 body {
   background-color: theme.$surface;
   color: theme.$on-surface;
+  font-family: monospace;
 }
 
 a {
