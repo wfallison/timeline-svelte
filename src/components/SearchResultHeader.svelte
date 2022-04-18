@@ -1,7 +1,7 @@
 <script lang="ts">
     import { text } from 'svelte/internal';
     import { spring } from 'svelte/motion';
-    import { articleResults, uniqueTitlesAndColors } from '../stores';
+    import { articleResults, uniqueTitlesAndColors, searchCriteria } from '../stores';
     import Button, { Group, Label } from '@smui/button';
     import Textfield from '@smui/textfield';
 
@@ -27,13 +27,24 @@
     .map(({ value }) => value)
 
 
-    let timeLineData = [];
+    let timeLineData: number|Iterable<any>|ArrayLike<any> = [];
+    let searchItems: number|Iterable<any>|ArrayLike<any> = [];
+    let headerData: number|any[] = []
 
     articleResults.subscribe(value => {
-		timeLineData = value;
-	});
+		  timeLineData = value;
+	  });
 
-    const resArray = Array.from(timeLineData)
+    searchCriteria.subscribe(value => {
+		  searchItems = value;
+	  });
+
+    uniqueTitlesAndColors.subscribe(value => {
+		  headerData = value;
+	  });
+
+    const resArray = Array.from(searchItems)
+    const timeLineArray = Array.from(timeLineData)
 
     const articleTitles = resArray.map((el) => {
         return el.articleTitle
@@ -42,12 +53,19 @@
     let uniqueTitles = [...new Set(articleTitles)]
     
     $uniqueTitlesAndColors = uniqueTitles.map((title, i) =>{
+
+      const countfiltered = timeLineArray.filter(function(element){
+          return element.articleTitle == title;
+      }).length
+
         return {
             title: title,
-            color: shuffled[i]
+            color: shuffled[i],
+            count: countfiltered
         };
-    })
+    });
 
+    console.log(headerData)
 
     </script>
 
@@ -58,15 +76,18 @@
 
     <div style="margin:auto;">
         <LayoutGrid>
-            {#each uniqueTitles as title, i}
+            {#each headerData as title, i}
               <Cell>
                 <div class="card-display">
                     <div class="card-container">
                         <Card padded>
                             <div style="display: inline-flex;">
-                            <Icon class="material-icons" on style="color:#{shuffled[i]};    padding-top: 0.7em;
+                            <Icon class="material-icons" on style="color:#{title.color}; padding-top: 0.7em;
                             padding-right: 0.75em;">discount</Icon>
-                            <h2>{title}</h2>
+                            <div style="width:65%">
+                              <h2>{title.title}</h2>
+                            </div>
+                            <div style="text-align: end;width: 25%%;">{title.count} results</div>
                             </div>
                         </Card>
                     </div>

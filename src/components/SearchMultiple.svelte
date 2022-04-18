@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { articleResults, loading } from '../stores';
+    import { articleResults, loading, searchCriteria } from '../stores';
     //export let articleResults;
     import Button, { Group, Label } from '@smui/button';
     import Textfield from '@smui/textfield';
@@ -42,6 +42,8 @@
     const makeRequest = async function () {
         $loading = true;
         open = false;
+
+        $searchCriteria = searchArray
 
         fetch(`http://localhost:3001/wikiTime/searchMultiple/`
         , {
