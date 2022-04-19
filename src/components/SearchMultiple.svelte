@@ -55,7 +55,8 @@
             body: JSON.stringify(searchArray),
         })
             .then(async (data)=>{
-                $articleResults = await data.json();
+                const results = await data.json();
+                $articleResults = results;
                 $loading = false;
             })
 
@@ -123,7 +124,7 @@
                 <Label>Clear All</Label>
             </Button>
         
-            <Button on:click={makeRequest} touch variant="raised" class="secondarybutton" style="float:right">
+            <Button on:click={makeRequest} touch variant="raised" style="float:right">
                 <Label>Search</Label>
             </Button>
             <Button on:click={() => open = false} touch variant="raised" style="float:right; margin-right:5px;">

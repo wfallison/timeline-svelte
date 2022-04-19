@@ -15,9 +15,8 @@
 		TimelineContent,
 		TimelineOppositeContent
 	} from 'svelte-vertical-timeline';
-import { mdiRobotConfusedOutline } from '@mdi/js';
 
-	let timeLineData;
+	let timeLineData = {};
 	let titlesAndColorsData;
 	let isLoading = false;
 
@@ -33,11 +32,15 @@ import { mdiRobotConfusedOutline } from '@mdi/js';
 		titlesAndColorsData = value;
 	})
 
-	function getColorByTitle(title){
-		const found = titlesAndColorsData.find(element => element.title === title);
-		return found.color;
+	function getColorByTitle(title){ //element.title == title
+		console.log(titlesAndColorsData)
+		const found = titlesAndColorsData.find(element => element.title == title || element.searchedValue == title);
+		console.log(found)
+		return found.color ? found.color: "CACF85"
 	}
 
+	console.log(timeLineData)
+	
 </script>
 
 
@@ -48,14 +51,14 @@ import { mdiRobotConfusedOutline } from '@mdi/js';
 	{#if timeLineData && isLoading == false}
 	<SearchResultHeader></SearchResultHeader>
 	<Timeline position="alternate" style={"margin: auto;width: 95%;}"}>
-		{#each timeLineData as option}
+		{#each timeLineData.sorted as option}
 			<TimelineItem>
 				<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
 					<div>
 					<p>{option.stringDate}</p>
 					<Chip chip={{}}touch style="margin-top: 10px;">
 						<LeadingIcon class="material-icons" style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon>
-						<Text>{option.articleTitle}</Text>
+						<Text>{option.articleTitle ? option.articleTitle : option.searchValue}</Text>
 						</Chip>
 						<Chip chip={{}}touch style="margin-top: 10px;">
 						<LeadingIcon class="material-icons">event</LeadingIcon>

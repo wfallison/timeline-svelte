@@ -43,29 +43,28 @@
 		  headerData = value;
 	  });
 
-    const resArray = Array.from(searchItems)
-    const timeLineArray = Array.from(timeLineData)
-
-    const articleTitles = resArray.map((el) => {
-        return el.articleTitle
+    const articleTitles = timeLineData.headers.map((el) => {
+          return {
+              articleTitle: el.header.foundArticleTitle,
+              searchedValue: el.header.searchedValue,
+              countRecords: el.header.countRecords,
+          }
     })
 
-    let uniqueTitles = [...new Set(articleTitles)]
-    
-    $uniqueTitlesAndColors = uniqueTitles.map((title, i) =>{
 
-      const countfiltered = timeLineArray.filter(function(element){
-          return element.articleTitle == title;
-      }).length
-
+    $uniqueTitlesAndColors = articleTitles.map((item, i) =>{
+      console.log(item)
         return {
-            title: title,
+            title: item.articleTitle,
+            searchedValue: item.searchedValue,
             color: shuffled[i],
-            count: countfiltered
+            count: item.countRecords,
+            pageId:item .pageId
         };
     });
 
-    console.log(headerData)
+    //remove header
+    //timeLineData.pop();
 
     </script>
 
@@ -85,7 +84,7 @@
                             <Icon class="material-icons" on style="color:#{title.color}; padding-top: 0.7em;
                             padding-right: 0.75em;">discount</Icon>
                             <div style="width:65%">
-                              <h2>{title.title}</h2>
+                              <h2>{title.title ?  title.title : title.searchedValue}</h2>
                             </div>
                             <div style="text-align: end;width: 25%%;">{title.count} results</div>
                             </div>
