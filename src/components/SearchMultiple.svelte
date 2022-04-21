@@ -45,7 +45,10 @@
 
         $searchCriteria = searchArray
 
-        fetch(`http://localhost:3001/wikiTime/searchMultiple/`
+        //http://localhost:3000/api/wtfWiki
+
+        //fetch(`http://localhost:3001/wikiTime/searchMultiple/`
+        fetch(`https://api-routes-cors-mp0om87r1-wfallison.vercel.app/api/w`
         , {
             method: 'POST',
             headers: {
