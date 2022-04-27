@@ -36,7 +36,7 @@
 		<Section>
 			<Title>WTL</Title>
 		</Section>
-		<Section>
+		<Section id="searchMultiple">
 			<SearchMultiple></SearchMultiple>
 		</Section>
 		<Section align="end" toolbar>

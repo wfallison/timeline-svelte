@@ -25,3 +25,38 @@ a {
 a:visited {
   color: color.scale(#40b3ff, $lightness: -35%);
 }
+
+#searchMultiple {
+  color:#2a2b2e;
+}
+
+li.autocomplete-items {
+  list-style: none;
+border-bottom: 1px solid #2a2b2e;
+z-index: 99;
+/*position the autocomplete items to be the same width as the container:*/
+top: 100%;
+left: 0;
+right: 0;
+  padding: 10px;
+cursor: pointer;
+background-color: #2a2b2e;
+}
+
+li.autocomplete-items:hover {
+/*when hovering an item:*/
+background-color: #000000;
+  color: #ffffff;
+}
+
+li.autocomplete-items:active {
+/*when navigating through the items using the arrow keys:*/
+background-color:#2a2b2e !important;
+color: #ffffff;
+}	
+  
+.autocomplete-active {
+/*when navigating through the items using the arrow keys:*/
+background-color:#2a2b2e !important;
+color: #ffffff;
+}
