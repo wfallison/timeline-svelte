@@ -48,7 +48,7 @@
         //http://localhost:3000/api/wtfWiki
 
         //fetch(`http://localhost:3000/api/w`
-        fetch(`https://api-routes-cors-mp0om87r1-wfallison.vercel.app/api/w`
+        fetch(`https://api-routes-cors-jet.vercel.app/api/w`
         , {
             method: 'POST',
             headers: {
@@ -72,7 +72,7 @@
         clearTimeout(timeout);
 
         timeout = setTimeout(function () {
-            fetch(`https://api-routes-cors-mp0om87r1-wfallison.vercel.app/api/lookup?searchTerm=${searchTerm}`
+            fetch(`https://api-routes-cors-jet.vercel.app/api/lookup?searchTerm=${searchTerm}`
             , {
                 method: 'GET',
                 headers: {
