@@ -47,8 +47,8 @@
 
         //http://localhost:3000/api/wtfWiki
 
-        //fetch(`http://localhost:3001/wikiTime/searchMultiple/`
-        fetch(`https://api-routes-cors-mp0om87r1-wfallison.vercel.app/api/w`
+        fetch(`http://localhost:3000/api/w`
+        //fetch(`https://api-routes-cors-mp0om87r1-wfallison.vercel.app/api/w`
         , {
             method: 'POST',
             headers: {
@@ -63,6 +63,30 @@
                 $loading = false;
             })
 
+    }
+
+    let timeout = null;
+
+    const articleLookup = async function(searchTerm) {
+
+        clearTimeout(timeout);
+
+        timeout = setTimeout(function () {
+            fetch(`http://localhost:3000/api/lookup?searchTerm=${searchTerm}`
+            , {
+                method: 'GET',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                }
+            })
+                .then(async (data)=>{
+                    const results = await data.json();
+                    console.log(results)
+                })
+
+                
+            }, 1000);
     }
      
     </script>
@@ -92,10 +116,12 @@
                 <div style="margin-top:1em;">
                     <Textfield style="width: 75%;"
                         variant="outlined" 
+                        id="search"
                         bind:value={searchTerm} 
-                        label="Enter the title of an article">
+                        label="Enter the title of an article"
+                        on:keyup={() => articleLookup(searchTerm)}>
                     </Textfield>
-                    <Button on:click={() => addNewEntry(searchTerm)}  touch variant="raised" style="float:right">
+                    <Button on:click={() => addNewEntry(searchTerm)} touch variant="raised" style="float:right">
                         <Label>Add</Label>
                     </Button>
                 </div>
