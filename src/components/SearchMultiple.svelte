@@ -15,7 +15,7 @@
     export let hideButton = false;
 
 
-    import { API_URL } from '$lib/Env';
+    import { API_URL } from '$lib/env';
 
 
     $: searchTerm = '';
