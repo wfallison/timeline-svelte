@@ -42,6 +42,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"dotenv": "^16.0.0",
 		"svelte-vertical-timeline": "^0.0.2"
 	}
 }

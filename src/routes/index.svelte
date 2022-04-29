@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import { articleResults, loading, uniqueTitlesAndColors } from '../stores';
 	import LinearProgress from '@smui/linear-progress';
 

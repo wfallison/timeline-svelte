@@ -13,7 +13,10 @@
 
     export let open = false;
     export let hideButton = false;
-    
+
+
+    import { API_URL } from '$lib/Env';
+
 
     $: searchTerm = '';
     $: searchArray = [];
@@ -55,7 +58,7 @@
         $searchCriteria = searchArray
 
         //fetch(`http://localhost:3000/api/w`
-        fetch(`https://api-routes-cors-jet.vercel.app/api/w`
+        fetch(`${API_URL}/api/w`
         , {
             method: 'POST',
             headers: {
@@ -79,7 +82,7 @@
         clearTimeout(timeout);
 
         timeout = setTimeout(function () {
-            fetch(`https://api-routes-cors-jet.vercel.app/api/lookup?searchTerm=${searchTerm}`
+            fetch(`${API_URL}/api/lookup?searchTerm=${searchTerm}`
             , {
                 method: 'GET',
                 headers: {
@@ -120,7 +123,8 @@
     // Pretend to be loading something...
     // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    await fetch(`https://api-routes-cors-jet.vercel.app/api/lookup?searchTerm=${input}`
+
+    await fetch(`${API_URL}/api/lookup?searchTerm=${input}`
             , {
                 method: 'GET',
                 headers: {
