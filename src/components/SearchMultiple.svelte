@@ -18,6 +18,8 @@
     import { API_URL } from '$lib/env';
     console.log('API_URL', API_URL)
 
+    console.log(process.env.API_URL)
+
 
     $: searchTerm = '';
     $: searchArray = [];
@@ -59,7 +61,7 @@
         $searchCriteria = searchArray
 
         //fetch(`http://localhost:3000/api/w`
-        fetch(`${API_URL}/api/w`
+        fetch(`${process.env.API_URL}/api/w`
         , {
             method: 'POST',
             headers: {
@@ -83,7 +85,7 @@
         clearTimeout(timeout);
 
         timeout = setTimeout(function () {
-            fetch(`${API_URL}/api/lookup?searchTerm=${searchTerm}`
+            fetch(`${process.env.API_URL}/api/lookup?searchTerm=${searchTerm}`
             , {
                 method: 'GET',
                 headers: {
@@ -126,7 +128,7 @@
 
     console.log('API_URL', API_URL)
 
-    await fetch(`${API_URL}/api/lookup?searchTerm=${input}`
+    await fetch(`${process.env.API_URL}/api/lookup?searchTerm=${input}`
             , {
                 method: 'GET',
                 headers: {
