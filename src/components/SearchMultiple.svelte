@@ -16,6 +16,7 @@
 
 
     import { API_URL } from '$lib/env';
+    console.log('API_URL', API_URL)
 
 
     $: searchTerm = '';
@@ -123,6 +124,7 @@
     // Pretend to be loading something...
     // await new Promise((resolve) => setTimeout(resolve, 1000));
 
+    console.log('API_URL', API_URL)
 
     await fetch(`${API_URL}/api/lookup?searchTerm=${input}`
             , {
@@ -139,6 +141,9 @@
                     return el.title
                 })
             })
+
+            console.log('API_URL', API_URL)
+
  
     if (myCounter !== counter) {
       // This means the function was called again, so we should cancel.
