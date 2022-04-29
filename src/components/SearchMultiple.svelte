@@ -4,7 +4,9 @@
     import Button, { Group, Label } from '@smui/button';
     import Textfield from '@smui/textfield';
     import { fade } from 'svelte/transition';
-
+    import Autocomplete from '@smui-extra/autocomplete';
+    import { Text } from '@smui/list';
+    import CircularProgress from '@smui/circular-progress';
     import Country from './Country.svelte';	
 
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
@@ -16,7 +18,7 @@
     $: searchTerm = '';
     $: searchArray = [];
 
-    let autoCompleteData = [];
+    $: autoCompleteData = [];
 
 	function spin(node, { duration }) {
 		return {
@@ -46,6 +48,9 @@
     const makeRequest = async function () {
         $loading = true;
         open = false;
+
+        value = '';
+        autoCompleteData = [];
 
         $searchCriteria = searchArray
 
@@ -87,64 +92,63 @@
                 const pages = results.query.allpages
                 autoCompleteData = pages.map((el:any) =>{
                     return {
-                        pageId: el.pageid,
-                        title: el.title
+                        text: el.title,
+                        value: el.pageid
                     }
                 })
             })
-        }, 1000);
+        }, 250);
     };
 
-    const clearInput = () => {
-        searchTerm = "";	
-        searchInput.focus();
+
+    let value: string | undefined = undefined;
+ 
+  let counter = 0;
+ 
+  async function searchItems(input: string) {
+    if (input === '') {
+      return [];
     }
+ 
 
-    const setInputVal = (countryName) => {
-        searchTerm = removeBold(countryName);
-        autoCompleteData = [];
-        hiLiteIndex = null;
-        document.querySelector('#search').focus();
-    }	
+    console.log(input)
+    console.log(value)
+    // Pretend to have some sort of canceling mechanism.
+    const myCounter = ++counter;
+    let autoCompleteData_Arr
+ 
+    // Pretend to be loading something...
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const submitValue = () => {
-        if (searchTerm) {
-            console.log(`${searchTerm} is submitted!`);
-            setTimeout(clearInput, 1000);
-        } else {
-            alert("You didn't type anything.")
-        }
+    await fetch(`https://api-routes-cors-jet.vercel.app/api/lookup?searchTerm=${input}`
+            , {
+                method: 'GET',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(async (data)=>{
+                const results = await data.json();
+                const pages = results.query.allpages
+                autoCompleteData_Arr = pages.map((el:any) =>{
+                    return el.title
+                })
+            })
+ 
+    if (myCounter !== counter) {
+      // This means the function was called again, so we should cancel.
+      // This is how you tell Autocomplete to cancel this search. It won't
+      // replace the results of any subsequent search that has already finished.
+      return false;
     }
-
-    const makeMatchBold = (str) => {
-	// replace part of (country name === inputValue) with strong tags
-	let matched = str.substring(0, inputValue.length);
-	let makeBold = `<strong>${matched}</strong>`;
-	let boldedMatch = str.replace(matched, makeBold);
-	return boldedMatch;
-}
-
-const removeBold = (str) => {
-	//replace < and > all characters between
-	return str.replace(/<(.)*?>/g, "");
-	// return str.replace(/<(strong)>/g, "").replace(/<\/(strong)>/g, "");
-}	
-     
-let hiLiteIndex = null;
-//$: hiLitedCountry = filteredCountries[hiLiteIndex]; 	
-
-
-// const navigateList = (e) => {
-// 	if (e.key === "ArrowDown" && hiLiteIndex <= filteredCountries.length-1) {
-// 		hiLiteIndex === null ? hiLiteIndex = 0 : hiLiteIndex += 1
-// 	} else if (e.key === "ArrowUp" && hiLiteIndex !== null) {
-// 		hiLiteIndex === 0 ? hiLiteIndex = filteredCountries.length-1 : hiLiteIndex -= 1
-// 	} else if (e.key === "Enter") {
-// 		setInputVal(filteredCountries[hiLiteIndex]);
-// 	} else {
-// 		return;
-// 	}
-// } 
+ 
+    // Return a list of matches.
+    // return fruits.filter((item) =>
+    //   item.toLowerCase().includes(input.toLowerCase())
+    // );
+    return autoCompleteData_Arr;
+  }
 
 let lostFocus = false;
 
@@ -165,42 +169,39 @@ let lostFocus = false;
         surface$style="width: 850px; max-width: calc(100vw - 32px);"
         class="secondary"
         on:click={() => autoCompleteData = []}
-        
     >
+    <!-- on:click={() => autoCompleteData = []} -->
         <Title id="large-scroll-title">Add articles to your timeline</Title>
         <Content id="large-scroll-content">
             
             <div>
 
                 <div style="margin-top:1em;">
-                    <Textfield style="width: 75%;"
-                        variant="outlined" 
-                        id="search"
-                        bind:value={searchTerm} 
-                        label="Enter the title of an article"
-                        on:keyup={() => articleLookup(searchTerm)}>
-                    </Textfield>
-                    <Button on:click={() => addNewEntry(searchTerm)} touch variant="raised" style="float:right">
+                     <div>
+                        <Autocomplete
+                          search={searchItems}
+                          bind:value
+                          showMenuWithNoInput={false}
+                          label="Search Criteria"
+                          style="width:100%"
+                        >
+                          <Text
+                            slot="loading"
+                            style="display: flex; width: 100%; justify-content: center; align-items: center;"
+                          >
+                            <CircularProgress style="height: 5em; width: 5em;" indeterminate />
+                          </Text>
+                        </Autocomplete>
+                      </div>
+                     <!-- {/if} -->
+                    <Button on:click={() => addNewEntry(value)} touch variant="raised" style="float:right">
                         <Label>Add</Label>
                     </Button>
                 </div>
-                {#if autoCompleteData.length > 0}
-                <div style="width: 75%; display: contents; margin-top:0px;">
-                    <ul id="autocomplete-items-list">
-                        {#each autoCompleteData as page, i}
-                            <Country itemLabel={page.title} highlighted={i === hiLiteIndex} on:click={() => setInputVal(page.title)} />
-                            <!--<li class="autocomplete-items" class:autocomplete-active={highlighted} on:click>{@html itemLabel}</li>-->
-                        {/each}			
-                    </ul>
-                </div>
-                {/if}
-                <span>Titles can be derived from the end of the wikipedia article's URL</span>
             </div>
-        </Content>
-        <Content>
-            <div>
+            <div style="margin-top:5em;">
                 {#each searchArray as entry, i}
-                    <div style="margin-top:1em;">
+                    <div style="margin-top:3em;">
                         <Textfield style="width: 75%;"
                             variant="outlined" 
                             bind:value={entry.articleTitle} 

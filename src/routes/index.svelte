@@ -40,6 +40,8 @@
 	}
 
 	console.log(timeLineData)
+
+	const truncate = (input) => input.length > 15 ? `${input.substring(0, 15)}...` : input;
 	
 </script>
 
@@ -55,20 +57,20 @@
 			<TimelineItem>
 				<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
 					<div>
-					<p>{option.stringDate}</p>
+					<h3 style="font-size:20px">{option.stringDate}</h3>
 					<Chip chip={{}}touch style="margin-top: 10px;">
 						<LeadingIcon class="material-icons" style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon>
 						<Text>{option.articleTitle ? option.articleTitle : option.searchValue}</Text>
 						</Chip>
 						<Chip chip={{}}touch style="margin-top: 10px;">
 						<LeadingIcon class="material-icons">event</LeadingIcon>
-						<Text>{option.date}</Text>
+						<Text>{option.stringDate}</Text>
 						</Chip>
 						{#if option.meta.sectionTitle}
 						<Chip chip={{}}touch style="max-width: 250px; margin-top: 10px;
 						overflow: hidden;">
 						<LeadingIcon class="material-icons">category</LeadingIcon>
-						<Text>{option.meta.sectionTitle}</Text>
+						<Text>{truncate(option.meta.sectionTitle)}</Text>
 						</Chip>
 						{/if}
 					</div>

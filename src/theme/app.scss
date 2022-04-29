@@ -24,3 +24,23 @@ body {
 body.mdc-dialog-scroll-lock {
     overflow: inherit;
 }
+
+.mdc-menu-surface--is-open-below {
+	height: 250px;
+}
+
+.mdc-dialog__surface{
+	height:75%;
+}
+
+#large-scroll-content .mdc-dialog__content{
+	height:-webkit-fill-available;
+}
+
+.mdc-text-field--label-floating{
+	width: 75% !important;
+}
+
+.mdc-menu-surface--is-open-below{
+	width:75% !important;
+}
