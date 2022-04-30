@@ -61,11 +61,11 @@
 					<h3 style="font-size:20px">{option.stringDate}</h3>
 					<Chip chip={{}}touch style="margin-top: 10px;">
 						<LeadingIcon class="material-icons" style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon>
-						<Text>{option.articleTitle ? option.articleTitle : option.searchValue}</Text>
+						<Text>{option.articleTitle ? truncate(option.articleTitle) : truncate(option.searchValue)}</Text>
 						</Chip>
 						<Chip chip={{}}touch style="margin-top: 10px;">
 						<LeadingIcon class="material-icons">event</LeadingIcon>
-						<Text>{option.stringDate}</Text>
+						<Text>{truncate(option.stringDate)}</Text>
 						</Chip>
 						{#if option.meta.sectionTitle}
 						<Chip chip={{}}touch style="max-width: 250px; margin-top: 10px;
