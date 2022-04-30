@@ -181,11 +181,11 @@ let lostFocus = false;
                           bind:value
                           showMenuWithNoInput={false}
                           label="Search Criteria"
-                          style="width:100%"
+                          style="width:90%"
                         >
                           <Text
                             slot="loading"
-                            style="display: flex; width: 100%; justify-content: center; align-items: center;"
+                            style="display: flex; width: 90%; justify-content: center; align-items: center;"
                           >
                             <CircularProgress style="height: 5em; width: 5em;" indeterminate />
                           </Text>
@@ -206,7 +206,7 @@ let lostFocus = false;
                             label="Search Term">
                         </Textfield>
 
-                        <Button on:click={() => removeEntry(i)}  touch variant="raised" style="float:right">
+                        <Button on:click={() => removeEntry(i)}  touch variant="raised" style="width: 20%; float:right;">
                             <Label>Remove</Label>
                         </Button>
                     </div>
