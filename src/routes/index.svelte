@@ -53,7 +53,7 @@
 
 	{#if timeLineData && isLoading == false}
 	<SearchResultHeader></SearchResultHeader>
-	<Timeline position="alternate" style={"margin: auto;width: 95%;}"}>
+	<Timeline position="alternate" style={"margin: auto; width: 90%;}"}>
 		{#each timeLineData.sorted as option}
 			<TimelineItem>
 				<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">

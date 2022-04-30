@@ -7,19 +7,13 @@
     import Autocomplete from '@smui-extra/autocomplete';
     import { Text } from '@smui/list';
     import CircularProgress from '@smui/circular-progress';
-    import Country from './Country.svelte';	
 
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
     export let open = false;
     export let hideButton = false;
 
-
-    import { API_URL } from '$lib/env';
-    console.log('API_URL', API_URL)
-
     console.log(process.env.API_URL)
-
 
     $: searchTerm = '';
     $: searchArray = [];
@@ -117,16 +111,12 @@
     }
  
 
-    console.log(input)
-    console.log(value)
     // Pretend to have some sort of canceling mechanism.
     const myCounter = ++counter;
     let autoCompleteData_Arr
  
     // Pretend to be loading something...
     // await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    console.log('API_URL', API_URL)
 
     await fetch(`${process.env.API_URL}/api/lookup?searchTerm=${input}`
             , {
@@ -143,9 +133,6 @@
                     return el.title
                 })
             })
-
-            console.log('API_URL', API_URL)
-
  
     if (myCounter !== counter) {
       // This means the function was called again, so we should cancel.
