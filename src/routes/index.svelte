@@ -42,7 +42,7 @@
 
 	console.log(timeLineData)
 
-	const truncate = (input) => input.length > 15 ? `${input.substring(0, 15)}...` : input;
+	const truncate = (input) => input.length > 10 ? `${input.substring(0, 10)}...` : input;
 	
 </script>
 
