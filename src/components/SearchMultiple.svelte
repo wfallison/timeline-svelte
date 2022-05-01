@@ -11,7 +11,6 @@
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
     export let open = false;
-    export let hideButton = false;
 
     console.log(process.env.API_URL)
 
@@ -241,16 +240,4 @@ let lostFocus = false;
     
 
     <style>
-        ul {
-            padding-left:0px;
-            height: 200px;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            width: 70.5%;
-            position: absolute;
-            z-index: 99;
-            margin-top: 0px;
-        }
-
-
     </style>

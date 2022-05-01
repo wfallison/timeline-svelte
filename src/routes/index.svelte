@@ -3,7 +3,6 @@
 	import { articleResults, loading, uniqueTitlesAndColors } from '../stores';
 	import LinearProgress from '@smui/linear-progress';
 
-	import SearchMultiple from '../components/SearchMultiple.svelte'
 	import SearchResultHeader from "../components/SearchResultHeader.svelte";
 	import Chip, { Set, LeadingIcon, Text } from '@smui/chips';
 
@@ -33,14 +32,10 @@
 		titlesAndColorsData = value;
 	})
 
-	function getColorByTitle(title){ //element.title == title
-		console.log(titlesAndColorsData)
+	function getColorByTitle(title){
 		const found = titlesAndColorsData.find(element => element.title == title || element.searchedValue == title);
-		console.log(found)
 		return found.color ? found.color: "CACF85"
 	}
-
-	console.log(timeLineData)
 
 	const truncate = (input) => input.length > 10 ? `${input.substring(0, 10)}...` : input;
 	
@@ -82,11 +77,6 @@
 				</TimelineSeparator>
 				<TimelineContent>
 					<h3>{option.sentence}</h3>
-						<span>
-						<!-- <Set chips={option} let:chip filter bind:selected> -->
-							
-						<!-- </Set> -->
-					</span>
 				</TimelineContent>
 			</TimelineItem>
 		{/each}
@@ -94,8 +84,4 @@
 	{/if}
 
 <style>
-	.grayed {
-		opacity: 0.6;
-	}
-
 </style>
