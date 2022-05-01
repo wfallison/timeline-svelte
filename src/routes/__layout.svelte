@@ -5,7 +5,7 @@
 	import IconButton from '@smui/icon-button';
 	import { Label, Icon } from '@smui/common';
 	import { Svg } from '@smui/common/elements';
-	import { mdiGithub, mdiWeb, mdiLightbulbVariantOutline  } from '@mdi/js';
+	import { mdiLightbulbVariantOutline  } from '@mdi/js';
 
 	import Search from '../components/Search.svelte';
 	import SearchMultiple from '../components/SearchMultiple.svelte'
