@@ -172,15 +172,13 @@ let lostFocus = false;
         <Content id="large-scroll-content">
             
             <div>
-
-                <div style="margin-top:1em;">
-                     <div>
+                <div style="margin-top:1em;display:flex;">
+                     <div style="width: 100%;">
                         <Autocomplete
                           search={searchItems}
                           bind:value
                           showMenuWithNoInput={false}
                           label="Search Criteria"
-                          style="width:90%"
                         >
                           <Text
                             slot="loading"
@@ -191,7 +189,7 @@ let lostFocus = false;
                         </Autocomplete>
                       </div>
                      <!-- {/if} -->
-                    <Button on:click={() => addNewEntry(value)} touch variant="raised" style="float:right">
+                    <Button on:click={() => addNewEntry(value)} touch variant="raised" style="float:right; margin-top: 1em;">
                         <Label>Add</Label>
                     </Button>
                 </div>
@@ -240,4 +238,7 @@ let lostFocus = false;
     
 
     <style>
+    .mdc-text-field .smui-text-field--standard{
+        width: 100% !important;
+    }
     </style>
