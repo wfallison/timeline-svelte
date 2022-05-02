@@ -6,6 +6,8 @@
 	import SearchResultHeader from "../components/SearchResultHeader.svelte";
 	import Chip, { Set, LeadingIcon, Text } from '@smui/chips';
 
+	import Fab, { Icon } from '@smui/fab';
+
 	import {
 		Timeline,
 		TimelineItem,
@@ -82,6 +84,15 @@
 		{/each}
 	</Timeline>
 	{/if}
+	<!-- <div class="flexy" style="bottom: 1em;
+    position: fixed;
+    right: 1em;">
+		<div class="margins">
+		  <Fab on:click={() => clicked++}>
+			<Icon class="material-icons">manage_search</Icon>
+		  </Fab>
+		</div>
+	  </div> -->
 
 <style>
 </style>

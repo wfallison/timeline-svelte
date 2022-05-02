@@ -7,7 +7,7 @@
     import Autocomplete from '@smui-extra/autocomplete';
     import { Text } from '@smui/list';
     import CircularProgress from '@smui/circular-progress';
-
+	import Fab, { Icon } from '@smui/fab';
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
     export let open = false;
@@ -232,10 +232,19 @@ let lostFocus = false;
     </div>
     {/if}
    
-    <Button on:click={() => (open = true)} touch variant="outlined" style="width:100%">
+    <!-- <Button on:click={() => (open = true)} touch variant="outlined" style="width:100%">
     <Label>Add more articles to search</Label>
     </Button>
-    
+     -->
+     <div class="flexy" style="bottom: 1em;
+    position: fixed;
+    right: 1em;">
+		<div class="margins">
+		  <Fab on:click={() => (open = true)}>
+			<Icon class="material-icons">manage_search</Icon>
+		  </Fab>
+		</div>
+	  </div>
 
     <style>
     .mdc-text-field .smui-text-field--standard{
