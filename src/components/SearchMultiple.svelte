@@ -236,12 +236,12 @@ let lostFocus = false;
     <Label>Add more articles to search</Label>
     </Button>
      -->
-     <div class="flexy" style="bottom: 1em;
+     <div class="flexy" style="bottom: 2em;
     position: fixed;
-    right: 1em;">
+    right: 2em;">
 		<div class="margins">
-		  <Fab on:click={() => (open = true)}>
-			<Icon class="material-icons">manage_search</Icon>
+		  <Fab style="width:5em;height:5em;" on:click={() => (open = true)}>
+			<Icon style="font-size:2.5em" class="material-icons">manage_search</Icon>
 		  </Fab>
 		</div>
 	  </div>
