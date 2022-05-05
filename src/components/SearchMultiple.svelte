@@ -10,6 +10,8 @@
 	import Fab, { Icon } from '@smui/fab';
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
+    import { page } from '$app/stores';
+
     export let open = false;
 
     console.log(process.env.API_URL)
@@ -45,6 +47,8 @@
     };
 
     const makeRequest = async function () {
+        let urlPrams = $page.url.search;
+        console.log(urlPrams)
         $loading = true;
         open = false;
 
@@ -196,7 +200,7 @@ let lostFocus = false;
             </div>
             <div style="margin-top:5em;">
                 {#each searchArray as entry, i}
-                    <div style="margin-top:3em;">
+                    <div style="margin-top:2em;">
                         <Textfield style="width: 75%;"
                             variant="outlined" 
                             bind:value={entry.articleTitle} 
