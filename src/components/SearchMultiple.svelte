@@ -57,7 +57,6 @@
 
         $searchCriteria = searchArray
 
-        //fetch(`http://localhost:3000/api/w`
         fetch(`${process.env.API_URL}/api/w`
         , {
             method: 'POST',
@@ -82,43 +81,38 @@
         clearTimeout(timeout);
 
         timeout = setTimeout(function () {
-            fetch(`${process.env.API_URL}/api/lookup?searchTerm=${searchTerm}`
-            , {
-                method: 'GET',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                }
-            })
-            .then(async (data)=>{
-                const results = await data.json();
-                const pages = results.query.allpages
-                autoCompleteData = pages.map((el:any) =>{
-                    return {
-                        text: el.title,
-                        value: el.pageid
-                    }
-                })
-            })
+            // fetch(`${process.env.API_URL}/api/lookup?searchTerm=${searchTerm}`
+            // , {
+            //     method: 'GET',
+            //     headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            //     }
+            // })
+            // .then(async (data)=>{
+            //     const results = await data.json();
+            //     const pages = results.query.allpages
+            //     autoCompleteData = pages.map((el:any) =>{
+            //         return {
+            //             text: el.title,
+            //             value: el.pageid
+            //         }
+            //     })
+            // })
         }, 250);
     };
 
 
     let value: string | undefined = undefined;
  
-  let counter = 0;
- 
-  async function searchItems(input: string) {
-    if (input === '') {
-      return [];
-    }
- 
 
-    // Pretend to have some sort of canceling mechanism.
-    const myCounter = ++counter;
+async function searchItems(input: string) {
+    if (input === '') {
+        return [];
+    }
+
     let autoCompleteData_Arr
- 
-    // Pretend to be loading something...
+
     // await new Promise((resolve) => setTimeout(resolve, 1000));
 
     await fetch(`${process.env.API_URL}/api/lookup?searchTerm=${input}`
@@ -136,20 +130,9 @@
                     return el.title
                 })
             })
- 
-    if (myCounter !== counter) {
-      // This means the function was called again, so we should cancel.
-      // This is how you tell Autocomplete to cancel this search. It won't
-      // replace the results of any subsequent search that has already finished.
-      return false;
-    }
- 
-    // Return a list of matches.
-    // return fruits.filter((item) =>
-    //   item.toLowerCase().includes(input.toLowerCase())
-    // );
+
     return autoCompleteData_Arr;
-  }
+}
 
 let lostFocus = false;
 
