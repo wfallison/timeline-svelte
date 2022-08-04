@@ -1,12 +1,9 @@
 <script lang="ts">
-
 	import { articleResults, loading, uniqueTitlesAndColors } from '../stores';
 	import LinearProgress from '@smui/linear-progress';
 
-	import SearchResultHeader from "../components/SearchResultHeader.svelte";
-	import Chip, { Set, LeadingIcon, Text } from '@smui/chips';
-
-	import Fab, { Icon } from '@smui/fab';
+	import SearchResultHeader from '../components/SearchResultHeader.svelte';
+	import Chip, { LeadingIcon, Text } from '@smui/chips';
 
 	import {
 		Timeline,
@@ -18,63 +15,74 @@
 		TimelineOppositeContent
 	} from 'svelte-vertical-timeline';
 
-	let timeLineData = {};
-	let titlesAndColorsData;
-	let isLoading = false;
+	let timeLineData: object = {};
+	let titlesAndColorsData: Array<string>;
+	let isLoading: boolean = false;
 
-	articleResults.subscribe(value => {
+	articleResults.subscribe((value) => {
 		timeLineData = value;
 	});
 
-	loading.subscribe(value => {
+	loading.subscribe((value) => {
 		isLoading = value;
 	});
 
-	uniqueTitlesAndColors.subscribe(value => {
+	uniqueTitlesAndColors.subscribe((value) => {
 		titlesAndColorsData = value;
-	})
+	});
 
-	function getColorByTitle(title){
-		const found = titlesAndColorsData.find(element => element.title == title || element.searchedValue == title);
-		return found.color ? found.color: "CACF85"
+	function getColorByTitle(title) {
+		const found = titlesAndColorsData.find(
+			(element) => element.title == title || element.searchedValue == title
+			
+		);
+		return found.color ? found.color : 'CACF85';
 	}
 
-	const truncate = (input) => input.length > 10 ? `${input.substring(0, 10)}...` : input;
-	
+	const truncate = (input) => (input.length > 10 ? `${input.substring(0, 10)}...` : input);
 </script>
 
+{#if isLoading == true}
+	<LinearProgress indeterminate />
+{/if}
 
-	{#if isLoading == true}
-		<LinearProgress indeterminate/>
-	{/if}
-
-	{#if timeLineData && isLoading == false}
-	<SearchResultHeader></SearchResultHeader>
-	<Timeline position="alternate" style={"margin: auto; width: 90%;}"}>
+{#if timeLineData && isLoading == false}
+	<SearchResultHeader />
+	<Timeline position="alternate" style={'margin: auto; width: 90%;}'}>
 		{#each timeLineData.sorted as option}
 			<TimelineItem>
 				<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
 					<div>
-					<h3 style="font-size:20px">{option.stringDate}</h3>
-					<Chip chip={{}}touch style="margin-top: 10px;">
-						<LeadingIcon class="material-icons" style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon>
-						<Text>{option.articleTitle ? truncate(option.articleTitle) : truncate(option.searchValue)}</Text>
+						<h3 style="font-size:20px">{option.stringDate}</h3>
+						<Chip chip="{{}}touch" style="margin-top: 10px;">
+							<LeadingIcon
+								class="material-icons"
+								style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon
+							>
+							<Text
+								>{option.articleTitle
+									? truncate(option.articleTitle)
+									: truncate(option.searchValue)}</Text
+							>
 						</Chip>
-						<Chip chip={{}}touch style="margin-top: 10px;">
-						<LeadingIcon class="material-icons">event</LeadingIcon>
-						<Text>{truncate(option.stringDate)}</Text>
+						<Chip chip="{{}}touch" style="margin-top: 10px;">
+							<LeadingIcon class="material-icons">event</LeadingIcon>
+							<Text>{truncate(option.stringDate)}</Text>
 						</Chip>
 						{#if option.meta.sectionTitle}
-						<Chip chip={{}}touch style="max-width: 250px; margin-top: 10px;
-						overflow: hidden;">
-						<LeadingIcon class="material-icons">category</LeadingIcon>
-						<Text>{truncate(option.meta.sectionTitle)}</Text>
-						</Chip>
+							<Chip
+								chip="{{}}touch"
+								style="max-width: 250px; margin-top: 10px;
+						overflow: hidden;"
+							>
+								<LeadingIcon class="material-icons">category</LeadingIcon>
+								<Text>{truncate(option.meta.sectionTitle)}</Text>
+							</Chip>
 						{/if}
 					</div>
 				</TimelineOppositeContent>
 				<TimelineSeparator>
-					<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}"/>
+					<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}" />
 					<TimelineConnector />
 				</TimelineSeparator>
 				<TimelineContent>
@@ -83,16 +91,7 @@
 			</TimelineItem>
 		{/each}
 	</Timeline>
-	{/if}
-	<!-- <div class="flexy" style="bottom: 1em;
-    position: fixed;
-    right: 1em;">
-		<div class="margins">
-		  <Fab on:click={() => clicked++}>
-			<Icon class="material-icons">manage_search</Icon>
-		  </Fab>
-		</div>
-	  </div> -->
+{/if}
 
 <style>
 </style>
