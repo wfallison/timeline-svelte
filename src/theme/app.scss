@@ -16,6 +16,10 @@ body {
 	width:-webkit-fill-available;
 }
 
+.mdc-top-app-bar {
+	background-color: #8CBA80;
+}
+
 .secondaryButton {
 	background-color: #8CBA80;
 }
@@ -42,4 +46,8 @@ body.mdc-dialog-scroll-lock {
 
 .mdc-menu-surface--is-open-below{
 	width:75% !important;
+}
+
+.smui-autocomplete__menu {
+	min-width: 200% !important;
 }

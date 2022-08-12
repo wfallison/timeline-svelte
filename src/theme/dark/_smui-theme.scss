@@ -4,8 +4,8 @@
 
 // Svelte Colors! (Dark Theme)
 @use '@material/theme/index' as theme with (
-  $primary: #000000,
-  $secondary: color.scale(#676778, $whiteness: -10%),
+  $primary: #0e141b,
+  $secondary: color.scale(#112e2e, $whiteness: -10%),
   $surface: color.adjust(color-palette.$grey-900, $blue: +4),
   $background: #2a2b2e,
   $error: color-palette.$red-700
@@ -32,31 +32,90 @@ a:visited {
 
 li.autocomplete-items {
   list-style: none;
-border-bottom: 1px solid #2a2b2e;
-z-index: 99;
-/*position the autocomplete items to be the same width as the container:*/
-top: 100%;
-left: 0;
-right: 0;
+  border-bottom: 1px solid #2a2b2e !important;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
   padding: 10px;
-cursor: pointer;
-background-color: #2a2b2e;
+  cursor: pointer;
+  background-color: #2a2b2e !important;
 }
 
 li.autocomplete-items:hover {
-/*when hovering an item:*/
-background-color: #000000;
-  color: #ffffff;
+  /*when hovering an item:*/
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 
-li.autocomplete-items:active {
-/*when navigating through the items using the arrow keys:*/
-background-color:#2a2b2e !important;
-color: #ffffff;
+li.mdc-deprecated-list-item--activated:active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color:#2a2b2e !important;
+  color: #ffffff !important;
 }	
   
 .autocomplete-active {
-/*when navigating through the items using the arrow keys:*/
-background-color:#2a2b2e !important;
-color: #ffffff;
+  /*when navigating through the items using the arrow keys:*/
+  background-color:#2a2b2e !important;
+  color: #ffffff !important;
 }
+
+.mdc-top-app-bar {
+  background-color: #112e2e !important;
+}
+
+.mdc-fab {
+  background-color: theme.$secondary !important;
+}
+
+.mdc-dialog__surface {
+  background-color: #2a2b2e !important;
+  color: #ffffff !important;
+}
+
+.mdc-button {
+  background-color: #112e2e !important;
+}
+
+.mdc-dialog__title {
+  color: #ffffff !important;
+}
+
+.mdc-text-field__input {
+  color: #ffffff !important;
+}
+
+.mdc-floating-label {
+  color: #ffffff !important;
+}
+
+.mdc-deprecated-list {
+  color: #ffffff !important;
+}
+
+.autocomplete__menu {
+  background-color: #0e141b !important;
+}
+
+.mdc-card {
+  background-color: #2a2b2e !important;
+}
+
+.mdc-line-ripple {
+  background-color: #112e2e !important;
+}
+
+.mdc-menu-surface {
+  background-color: #0e141b !important;
+}
+
+.mdc-line-ripple--active {
+  color:#112e2e !important;
+}
+
+.smui-autocomplete__menu .mdc-menu .mdc-menu-surface {
+  background-color: #112e2e !important;
+  color: #112e2e !important;
+}
+
