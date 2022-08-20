@@ -9,7 +9,7 @@
 
 	import Search from '../components/Search.svelte';
 	import SearchMultiple from '../components/SearchMultiple.svelte'
-
+	import SplashDialog from '../components/SplashDialog.svelte'
 
 
 	let topAppBar: TopAppBarComponentDev;
@@ -48,6 +48,9 @@
 				</Icon>
 			</IconButton>
 
+		</Section>
+		<Section>
+			<SplashDialog open=true></SplashDialog>
 		</Section>
 	</Row>
 </TopAppBar>

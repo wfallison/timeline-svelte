@@ -13,6 +13,7 @@
     import Fab, { Icon } from '@smui/fab';
     import { Text } from '@smui/list';
 	import Textfield from '@smui/textfield';
+import Search from './Search.svelte';
 
     /* 
     Control for dialog opened/closed
@@ -69,6 +70,7 @@
 		autoCompleteData = [];
 
 		$searchCriteria = searchArray;
+		console.log(searchArray)
 
 		fetch(`${process.env.API_URL}/api/w`, {
 			method: 'POST',

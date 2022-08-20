@@ -51,3 +51,7 @@ body.mdc-dialog-scroll-lock {
 .smui-autocomplete__menu {
 	min-width: 100% !important;
 }
+
+.mdc-dialog__surface{
+	height: fit-content;
+}
