@@ -24,10 +24,6 @@
         let invalid = false;
       
     </script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/svelte-material-ui@6.0.0/bare.min.css"
-    />
 
     <div style="margin:auto;">
     <Textfield bind:value={searchString}></Textfield >
