@@ -50,45 +50,47 @@
 	<SearchResultHeader />
 	<Timeline position="alternate" style={'margin: auto; width: 90%;}'}>
 		{#each timeLineData.sorted as option}
-			<TimelineItem>
-				<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
-					<div>
-						<h3 style="font-size:20px">{option.stringDate}</h3>
-						<Chip chip="{{}}touch" style="margin-top: 10px;">
-							<LeadingIcon
-								class="material-icons"
-								style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon
-							>
-							<Text
-								>{option.articleTitle
-									? truncate(option.articleTitle)
-									: truncate(option.searchValue)}</Text
-							>
-						</Chip>
-						<Chip chip="{{}}touch" style="margin-top: 10px;">
-							<LeadingIcon class="material-icons">event</LeadingIcon>
-							<Text>{truncate(option.stringDate)}</Text>
-						</Chip>
-						{#if option.meta.sectionTitle}
-							<Chip
-								chip="{{}}touch"
-								style="max-width: 250px; margin-top: 10px;
-						overflow: hidden;"
-							>
-								<LeadingIcon class="material-icons">category</LeadingIcon>
-								<Text>{truncate(option.meta.sectionTitle)}</Text>
+			{#if option.date !== null}
+				<TimelineItem>
+					<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
+						<div>
+							<h3 style="font-size:20px">{option.stringDate}</h3>
+							<Chip chip="{{}}touch" style="margin-top: 10px;">
+								<LeadingIcon
+									class="material-icons"
+									style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon
+								>
+								<Text
+									>{option.articleTitle
+										? truncate(option.articleTitle)
+										: truncate(option.searchValue)}</Text
+								>
 							</Chip>
-						{/if}
-					</div>
-				</TimelineOppositeContent>
-				<TimelineSeparator>
-					<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}" />
-					<TimelineConnector />
-				</TimelineSeparator>
-				<TimelineContent>
-					<h3>{option.sentence}</h3>
-				</TimelineContent>
-			</TimelineItem>
+							<Chip chip="{{}}touch" style="margin-top: 10px;">
+								<LeadingIcon class="material-icons">event</LeadingIcon>
+								<Text>{truncate(option.stringDate)}</Text>
+							</Chip>
+							{#if option.meta.sectionTitle}
+								<Chip
+									chip="{{}}touch"
+									style="max-width: 250px; margin-top: 10px;
+							overflow: hidden;"
+								>
+									<LeadingIcon class="material-icons">category</LeadingIcon>
+									<Text>{truncate(option.meta.sectionTitle)}</Text>
+								</Chip>
+							{/if}
+						</div>
+					</TimelineOppositeContent>
+					<TimelineSeparator>
+						<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}" />
+						<TimelineConnector />
+					</TimelineSeparator>
+					<TimelineContent>
+						<h3>{option.sentence}</h3>
+					</TimelineContent>
+				</TimelineItem>
+			{/if}
 		{/each}
 	</Timeline>
 {/if}
