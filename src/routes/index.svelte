@@ -50,7 +50,6 @@
 	<SearchResultHeader />
 	<Timeline position="alternate" style={'margin: auto; width: 90%;}'}>
 		{#each timeLineData.sorted as option}
-			{#if option.date !== null}
 				<TimelineItem>
 					<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
 						<div>
@@ -90,7 +89,6 @@
 						<h3>{option.sentence}</h3>
 					</TimelineContent>
 				</TimelineItem>
-			{/if}
 		{/each}
 	</Timeline>
 {/if}
