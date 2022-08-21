@@ -69,21 +69,19 @@
                         You can search for one, or many articles. All of the events in the articles you search for
                         will be combined into a single scrollable timeline.
                     </p>
-                    <p>
-                        <b>Click the search button below</b>, or try the Demo
-                    </p>
+
                     <Button on:click={() => randomSearch()} touch variant="raised" style="float:left">
                         <Label>Try the demo!</Label>
                     </Button>
                     
-				<Button
+				<!-- <Button
                 on:click={() => (open = false)}
                 touch
                 variant="raised"
                 style="float:right; margin-right:5px;"
                 >
                     <Label>Start Search</Label>
-                </Button>
+                </Button> -->
 			</div>
 			</Content>
 
