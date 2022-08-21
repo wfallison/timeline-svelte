@@ -31,7 +31,8 @@
             {"articleTitle": "Rodinia"},
             {"articleTitle": "Columbia (supercontinent)"},
             {"articleTitle": "Tool"},
-            {"articleTitle": "Cat"}
+            {"articleTitle": "Rome"},
+            {"articleTitle": "Ancient Egypt"}
         ]
 
         makeRequestWithVars(randomSearchVars)

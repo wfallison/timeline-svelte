@@ -84,11 +84,21 @@
 			$loading = false;
 		});
 	};
-
+	let counter = 0;
 	async function searchItems(input: string) {
 		if (input === '') {
-			return [];
+			return false;
 		}
+		const myCounter = ++counter;
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+
+		if (myCounter !== counter) {
+      // This means the function was called again, so we should cancel.
+      // This is how you tell Autocomplete to cancel this search. It won't
+      // replace the results of any subsequent search that has already finished.
+			// This is from the manual. Its a little clunky feeling but better than before
+      return false;
+    }
 
 		let autoCompleteData_Arr;
 		await fetch(`${process.env.API_URL}/api/lookup?searchTerm=${input}`, {
@@ -108,6 +118,11 @@
 		return autoCompleteData_Arr;
 	}
 </script>
+
+<!-- <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/svelte-material-ui@6.0.0/bare.min.css"
+/> -->
 
 {#if open}
 	<div in:spin={{ duration: 8000 }} out:fade>
@@ -148,7 +163,7 @@
 						</Button>
 					</div>
 				</div>
-				<div style="margin-top:5em;">
+				<div style="margin-top:5em; height:25em;">
 					{#each searchArray as entry, i}
 						<div style="margin-top:2em;">
 							<Textfield
