@@ -72,15 +72,15 @@
 			<Content id="mandatory-content">
 				<div>
                     <h1>Thanks for visiting!</h1>
-                    <p> I'm a tool that parses data from Wikipedia articles to create visual timelines for you.
-                        You can search for one, or many articles. I'll find all of the events within the articles you search for, and combine
-                        them into a single visual timeline.
+                    <p> This is a tool that parses data from Wikipedia articles to create visual timelines for you.
+                        You can search for one, or many articles. All of the events in the articles you search for
+                        will be combined into a single scrollable timeline.
                     </p>
                     <p>
-                        Go ahead! <b>Click the search button below</b>, or if you'd like you can view one of the "random" articles we've selected!
+                        <b>Click the search button below</b>, or try the Demo
                     </p>
                     <Button on:click={() => randomSearch()} touch variant="raised" style="float:left">
-                        <Label>Random!</Label>
+                        <Label>Try the demo!</Label>
                     </Button>
                     
 				<Button
