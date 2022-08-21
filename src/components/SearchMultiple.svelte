@@ -1,31 +1,30 @@
 <script lang="ts">
-
-    import { page } from '$app/stores';
+	import { page } from '$app/stores';
 	import { articleResults, loading, searchCriteria } from '../stores';
 
-    import { fade } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
-    /* SMUI Components (Can this be condensed?) */
-    import Autocomplete from '@smui-extra/autocomplete';
+	/* SMUI Components (Can this be condensed?) */
+	import Autocomplete from '@smui-extra/autocomplete';
 	import Button, { Group, Label } from '@smui/button';
-    import CircularProgress from '@smui/circular-progress';
-    import Dialog, { Title, Content, Actions } from '@smui/dialog';
-    import Fab, { Icon } from '@smui/fab';
-    import { Text } from '@smui/list';
+	import CircularProgress from '@smui/circular-progress';
+	import Dialog, { Title, Content, Actions } from '@smui/dialog';
+	import Fab, { Icon } from '@smui/fab';
+	import { Text } from '@smui/list';
 	import Textfield from '@smui/textfield';
-import Search from './Search.svelte';
+	import Search from './Search.svelte';
 
-    /* 
+	/* 
     Control for dialog opened/closed
     Accessible where this component is imported
-    */  
+    */
 	export let open = false;
 
 	$: searchTerm = '';
 	$: searchArray = [];
 	$: autoCompleteData = [];
 
-    /* 
+	/* 
     let value: string;
     The search string pretty much
     needs a new name..
@@ -70,13 +69,14 @@ import Search from './Search.svelte';
 		autoCompleteData = [];
 
 		$searchCriteria = searchArray;
-		console.log(searchArray)
+		console.log(searchArray);
 
 		fetch(`${process.env.API_URL}/api/w`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Cache-Control': 'max-age: 86400000'
 			},
 			body: JSON.stringify(searchArray)
 		}).then(async (data) => {

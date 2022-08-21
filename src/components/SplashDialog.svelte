@@ -21,10 +21,6 @@
 	export let open = false;
 
     const randomSearch = () => {
-        /*Get set of random articles
-          in the format of the usual
-          request object.
-        */
 
         let randomSearchVars;
         randomSearchVars = [
