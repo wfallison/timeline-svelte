@@ -28,9 +28,12 @@
 
         let randomSearchVars;
         randomSearchVars = [
-            {"articleTitle": "Mobile Phone"},
-            {"articleTitle": "Internet"},
-            {"articleTitle": "Electricity"}
+            {"articleTitle": "Pangaea"},
+            {"articleTitle": "Human"},
+            {"articleTitle": "Agriculture"},
+            {"articleTitle": "Horseshoe crab"},
+            {"articleTitle": "Rodinia"},
+            {"articleTitle": "Columbia (supercontinent)"}
         ]
 
         makeRequestWithVars(randomSearchVars)
