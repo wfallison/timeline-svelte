@@ -33,7 +33,8 @@
             {"articleTitle": "Agriculture"},
             {"articleTitle": "Horseshoe crab"},
             {"articleTitle": "Rodinia"},
-            {"articleTitle": "Columbia (supercontinent)"}
+            {"articleTitle": "Columbia (supercontinent)"},
+            {"articleTitle": "Tool"}
         ]
 
         makeRequestWithVars(randomSearchVars)
