@@ -30,7 +30,8 @@
             {"articleTitle": "Horseshoe crab"},
             {"articleTitle": "Rodinia"},
             {"articleTitle": "Columbia (supercontinent)"},
-            {"articleTitle": "Tool"}
+            {"articleTitle": "Tool"},
+            {"articleTitle": "Cat"}
         ]
 
         makeRequestWithVars(randomSearchVars)
