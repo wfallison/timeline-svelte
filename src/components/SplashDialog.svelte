@@ -6,13 +6,8 @@
     import { fade } from 'svelte/transition';
 
     /* SMUI Components (Can this be condensed?) */
-    import Autocomplete from '@smui-extra/autocomplete';
 	import Button, { Group, Label } from '@smui/button';
-    import CircularProgress from '@smui/circular-progress';
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
-    import Fab, { Icon } from '@smui/fab';
-    import { Text } from '@smui/list';
-	import Textfield from '@smui/textfield';
 
     /* 
     Control for dialog opened/closed
@@ -31,8 +26,6 @@
             {"articleTitle": "Rodinia"},
             {"articleTitle": "Columbia (supercontinent)"},
             {"articleTitle": "Tool"},
-            {"articleTitle": "Rome"},
-            {"articleTitle": "Ancient Egypt"}
         ]
 
         makeRequestWithVars(randomSearchVars)
