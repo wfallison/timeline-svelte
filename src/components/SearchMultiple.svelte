@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { articleResults, loading, searchCriteria } from '../stores';
-
+  import { goto } from "$app/navigation";
 	import { fade } from 'svelte/transition';
+  import { onMount } from 'svelte';
+
 
 	/* SMUI Components (Can this be condensed?) */
 	import Autocomplete from '@smui-extra/autocomplete';
@@ -13,6 +15,7 @@
 	import { Text } from '@smui/list';
 	import Textfield from '@smui/textfield';
 	import Search from './Search.svelte';
+  
 
 	/* 
     Control for dialog opened/closed
@@ -32,13 +35,6 @@
 
 	let value: string;
 
-	function spin(node, { duration }) {
-		return {
-			duration,
-			css: (t) => ``
-		};
-	}
-
 	const removeEntry = function (itemIndex: number) {
 		searchArray.splice(itemIndex, 1);
 		searchArray = searchArray;
@@ -55,13 +51,13 @@
 	};
 
 	const removeAllEntries = function () {
+    console.log(searchArray)
 		searchArray = [];
 		searchArray = searchArray;
 	};
 
 	const makeRequest = async function () {
-		let urlPrams = $page.url.search;
-		console.log(urlPrams);
+		
 		$loading = true;
 		open = false;
 
@@ -69,7 +65,19 @@
 		autoCompleteData = [];
 
 		$searchCriteria = searchArray;
-		console.log(searchArray);
+
+    let query = new URLSearchParams();
+    let searchURL;
+
+    for (const article of searchArray){
+      query.append('articleTitle', btoa(article.articleTitle));
+    }
+        
+    goto(`?${query.toString()}`,
+      {
+        keepfocus: true
+      }
+    );
 
 		fetch(`${process.env.API_URL}/api/w`, {
 			method: 'POST',
@@ -117,6 +125,24 @@
 
 		return autoCompleteData_Arr;
 	}
+  
+  function getJsonFromUrl(url) {
+    if(!url) url = location.search;
+    url.split("&").forEach(function(part) {
+      var item = part.split("=");
+      addNewEntry(atob(item[1].replace(/%3D/g, '')));
+    });
+  }
+
+  onMount(async () => {
+    let urlParams = $page.url.search;
+		getJsonFromUrl(urlParams)
+    if (searchArray){
+      makeRequest();
+    }
+	});
+
+
 </script>
 
 <!-- <link
@@ -125,7 +151,7 @@
 /> -->
 
 {#if open}
-	<div in:spin={{ duration: 8000 }} out:fade>
+	<div out:fade>
 		<Dialog
 			bind:open
 			aria-labelledby="large-scroll-title"

@@ -53,14 +53,13 @@
 </script>
 
 {#if open}
-	<div in:spin={{ duration: 8000 }} out:fade>
+	<div out:fade>
 		<Dialog
 			bind:open
 			aria-labelledby="mandatory-title"
 			aria-describedby="madanatory-content"
 			surface$style="width: 850px; max-width: calc(100vw - 32px);"
 			class="secondary"
-			on:click={() => (autoCompleteData = [])}
 		>
 			<Content id="mandatory-content">
 				<div>

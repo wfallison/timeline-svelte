@@ -79,10 +79,10 @@
                             <div style="display: inline-flex;">
                             <Icon class="material-icons" on style="color:#{title.color}; padding-top: 0.7em;
                             padding-right: 0.75em;">discount</Icon>
-                            <div style="width:65%">
-                              <h2>{title.title ?  title.title : title.searchedValue}</h2>
+                            <div style="width:60%; padding-right:5%">
+                              <h2 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{title.title ?  title.title : title.searchedValue}</h2>
                             </div>
-                            <div style="text-align: end;width: 25%%;">{title.count} results</div>
+                            <div style="text-align: end; width: 35%; margin-right:25px;">{title.count} results</div>
                             </div>
                         </Card>
                     </div>
