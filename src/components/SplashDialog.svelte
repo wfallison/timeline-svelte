@@ -1,18 +1,19 @@
 <script lang="ts">
 
-    import { page } from '$app/stores';
-	import { articleResults, loading, searchCriteria } from '../stores';
+  import { page } from '$app/stores';
+  import { articleResults, loading, searchCriteria } from '../stores';
 
-    import { fade } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
 
-    /* SMUI Components (Can this be condensed?) */
-	import Button, { Group, Label } from '@smui/button';
-    import Dialog, { Title, Content, Actions } from '@smui/dialog';
+  /* SMUI Components (Can this be condensed?) */
+  import Button, { Group, Label } from '@smui/button';
+  import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
-    /* 
-    Control for dialog opened/closed
-    Accessible where this component is imported
-    */  
+  /* 
+  Control for dialog opened/closed
+  Accessible where this component is imported
+  */  
+
 	export let open = false;
 
     const randomSearch = () => {
@@ -32,10 +33,8 @@
     }
 
     const makeRequestWithVars = async function (randomSearchVars) {
-		let urlPrams = $page.url.search;
-		console.log(urlPrams);
+
 		$loading = true;
-		open = false;
 
 		fetch(`${process.env.API_URL}/api/w`, {
 			method: 'POST',
@@ -48,8 +47,14 @@
 			const results = await data.json();
 			$articleResults = results;
 			$loading = false;
+      open = false;
 		});
 	};
+
+    let urlPrams = $page.url.search;
+    let hasURLParams = (urlPrams.length > 0)
+    open = !hasURLParams
+
 </script>
 
 {#if open}
