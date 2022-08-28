@@ -77,14 +77,14 @@
 										: option.searchValue}</Text
 								>
 							</Chip>
-							<Chip chip="{{}}touch" style="max-width: 90%; margin-top: 10px;">
+							<Chip chip="{{}}touch" style="max-width: 90%; margin-top: 10px; position:relative;">
 								<LeadingIcon class="material-icons">event</LeadingIcon>
 								<Text>{option.stringDate}</Text>
 							</Chip>
 							{#if option.meta.sectionTitle}
 								<Chip
 									chip="{{}}touch"
-									style="max-width: 90%; margin-top: 10px;"
+									style="max-width: 90%; margin-top: 10px; position:relative;"
 								>
 									<LeadingIcon class="material-icons">category</LeadingIcon>
 									<Text>{option.meta.sectionTitle}</Text>
@@ -97,7 +97,7 @@
 						<TimelineConnector style="background-color: #{getColorByTitle(option.articleTitle)}"/>
 					</TimelineSeparator>
 					<TimelineContent style="width: 45%">
-						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em; word-break: break-word;">{option.sentence}</h3>
+						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em; word-break: break-word; position:relative;">{option.sentence}</h3>
 					</TimelineContent>
 				</TimelineItem>
 		{/each}
