@@ -4,18 +4,21 @@
 
 // Svelte Colors!
 @use '@material/theme/index' as theme with (
-  $primary: #3586eb,
-  $secondary: #676778,
-  $surface: #fff,
-  $background: #fff,
+  $primary: #1b263b, //for submit button sort of thing
+  $secondary: #415a77, //for not submit buttons?
+  $surface: #f6fff8,
+  $on-surface: #1b263b,
+  $background: #e0e1dd, //
   $error: color-palette.$red-900,
 );
+
+//mdc-card smui-card--padded
 
 @use './app';
 
 html,
 body {
-  background-color: theme.$surface;
+  background-color: theme.$background;
   color: theme.$on-surface;
   font-family: monospace;
 }
@@ -29,37 +32,41 @@ a:visited {
 
 li.autocomplete-items {
   list-style: none;
-border-bottom: 1px solid #d4d4d4;
-z-index: 99;
-/*position the autocomplete items to be the same width as the container:*/
-top: 100%;
-left: 0;
-right: 0;
-  padding: 10px;
-cursor: pointer;
-background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+    padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
 }
 
 li.autocomplete-items:hover {
-/*when hovering an item:*/
-background-color: #3586eb;
+  /*when hovering an item:*/
+  background-color: #3586eb;
   color: white;
 }
 
 li.autocomplete-items:active {
-/*when navigating through the items using the arrow keys:*/
-background-color: DodgerBlue !important;
-color: #ffffff;
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
 }	
   
 .autocomplete-active {
-/*when navigating through the items using the arrow keys:*/
-background-color: DodgerBlue !important;
-color: #ffffff;
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
 }
 
 .mdc-top-app-bar {
-  background-color: #018786 !important;
+  background-color: theme.$secondary !important;
+}
+
+.mdc-top-app-bar__row {
+  background-color: theme.$secondary !important;
 }
 
 .mdc-floating-label {
@@ -67,11 +74,24 @@ color: #ffffff;
 }
 
 .mdc-button {
-  background-color: #018786 !important;
+  background-color: theme.$primary !important;
 }
 
-.mdc-fab{
-  background-color: #018786 !important;
+.mdc-fab {
+  background-color: theme.$secondary !important;
+  color: #018786 !important;
+}
+
+.mdc-card {
+  background-color: theme.$background !important;
+}
+
+.mdc-chip {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+
+.mdc-dialog__surface{
+  background-color: theme.$background !important;
   color: #018786 !important;
 }
 
@@ -81,6 +101,11 @@ color: #ffffff;
 }
 
 .mdc-deprecated-list-item--selected{
+	background-color: #00878142;
+	color:#ffffff !important;
+}
+
+.mdc-text-field .smui-text-field--standard .mdc-text-field--label-floating{
 	background-color: #00878142;
 	color:#ffffff !important;
 }
