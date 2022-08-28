@@ -1,9 +1,12 @@
 <script lang="ts">
-	import { articleResults, loading, uniqueTitlesAndColors } from '../stores';
+	import { articleResults, loading, uniqueTitlesAndColors, err } from '../stores';
 	import LinearProgress from '@smui/linear-progress';
 
 	import SearchResultHeader from '../components/SearchResultHeader.svelte';
 	import Chip, { LeadingIcon, Text } from '@smui/chips';
+
+  import ErrorDialog from '../components/ErrorDialog.svelte'
+
 
 	import {
 		Timeline,
@@ -18,6 +21,7 @@
 	let timeLineData: object = {};
 	let titlesAndColorsData: Array<string>;
 	let isLoading: boolean = false;
+  let hasErrors: boolean = false;
 
 	articleResults.subscribe((value) => {
 		timeLineData = value;
@@ -25,6 +29,10 @@
 
 	loading.subscribe((value) => {
 		isLoading = value;
+	});
+
+	err.subscribe((value) => {
+		hasErrors = value;
 	});
 
 	uniqueTitlesAndColors.subscribe((value) => {
@@ -42,8 +50,12 @@
 	const truncate = (input) => (input.length > 10 ? `${input.substring(0, 10)}...` : input);
 </script>
 
-{#if isLoading == true}
+{#if isLoading == true && hasErrors == false}
 	<LinearProgress indeterminate />
+{/if}
+
+{#if hasErrors == true}
+  <ErrorDialog></ErrorDialog>
 {/if}
 
 {#if timeLineData && isLoading == false}

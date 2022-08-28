@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { articleResults, loading, searchCriteria } from '../stores';
+	import { articleResults, loading, searchCriteria, err } from '../stores';
   import { goto } from "$app/navigation";
 	import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
@@ -15,6 +15,8 @@
 	import { Text } from '@smui/list';
 	import Textfield from '@smui/textfield';
 	import Search from './Search.svelte';
+
+  import ErrorsDialog from './ErrorDialog.svelte'
   
 
 	/* 
@@ -79,7 +81,7 @@
       }
     );
 
-		fetch(`${process.env.API_URL}/api/w`, {
+		await fetch(`${process.env.API_URL}/api/w`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -90,7 +92,9 @@
 			const results = await data.json();
 			$articleResults = results;
 			$loading = false;
-		});
+		}).catch((error) => {
+       $err = true;
+    });
 	};
 	let counter = 0;
 	async function searchItems(input: string) {
@@ -109,6 +113,7 @@
     }
 
 		let autoCompleteData_Arr;
+
 		await fetch(`${process.env.API_URL}/api/lookup?searchTerm=${input}`, {
 			method: 'GET',
 			headers: {
@@ -121,7 +126,9 @@
 			autoCompleteData_Arr = pages.map((el: any) => {
 				return el.title;
 			});
-		});
+		}).catch((err) => {
+       console.log(err)
+    });
 
 		return autoCompleteData_Arr;
 	}

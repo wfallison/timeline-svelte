@@ -24,6 +24,10 @@ body {
 	background-color: #8CBA80;
 }
 
+.mdc-banner__content {
+  max-width: 100%;
+}
+
 body.mdc-dialog-scroll-lock {
     overflow: inherit;
 }
