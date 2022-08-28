@@ -66,7 +66,7 @@
 					<TimelineOppositeContent slot="opposite-content" style="font-size:16px; width: 20px">
 						<div>
 							<h3 style="font-size:20px; margin-bottom: 0px;">{option.stringDate}</h3>
-							<Chip chip="{{}}touch" style="margin-top: 10px;">
+							<Chip chip="{{}}touch" style="max-width: 90%; margin-top: 10px;">
 								<LeadingIcon
 									class="material-icons"
 									style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon
@@ -77,7 +77,7 @@
 										: option.searchValue}</Text
 								>
 							</Chip>
-							<Chip chip="{{}}touch" style="margin-top: 10px;">
+							<Chip chip="{{}}touch" style="max-width: 90%; margin-top: 10px;">
 								<LeadingIcon class="material-icons">event</LeadingIcon>
 								<Text>{option.stringDate}</Text>
 							</Chip>
