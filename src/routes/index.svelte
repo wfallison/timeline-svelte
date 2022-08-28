@@ -97,7 +97,7 @@
 						<TimelineConnector style="background-color: #{getColorByTitle(option.articleTitle)}"/>
 					</TimelineSeparator>
 					<TimelineContent style="width: 45%">
-						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em;">{option.sentence}</h3>
+						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em; word-break: break-all;">{option.sentence}</h3>
 					</TimelineContent>
 				</TimelineItem>
 		{/each}
