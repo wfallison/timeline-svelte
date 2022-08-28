@@ -6,7 +6,7 @@
 	import Chip, { LeadingIcon, Text } from '@smui/chips';
 
   import ErrorDialog from '../components/ErrorDialog.svelte'
-
+	import SearchMultiple from '../components/SearchMultiple.svelte'
 
 	import {
 		Timeline,
@@ -39,15 +39,15 @@
 		titlesAndColorsData = value;
 	});
 
-	function getColorByTitle(title) {
-		const found = titlesAndColorsData.find(
+	function getColorByTitle(title:string) {
+		const found:Array<string> = titlesAndColorsData.find(
 			(element) => element.title == title || element.searchedValue == title
 			
 		);
 		return found.color ? found.color : 'CACF85';
 	}
 
-	const truncate = (input) => (input.length > 10 ? `${input.substring(0, 10)}...` : input);
+	const truncate = (input:string) => (input.length > 10 ? `${input.substring(0, 10)}...` : input);
 </script>
 
 {#if isLoading == true && hasErrors == false}
@@ -63,7 +63,7 @@
 	<Timeline position="alternate" style={'margin: auto; width: 90%;}'}>
 		{#each timeLineData.sorted as option}
 				<TimelineItem>
-					<TimelineOppositeContent slot="opposite-content" style="font-size:16px;">
+					<TimelineOppositeContent slot="opposite-content" style="font-size:16px; width: 20px">
 						<div>
 							<h3 style="font-size:20px; margin-bottom: 0px;">{option.stringDate}</h3>
 							<Chip chip="{{}}touch" style="margin-top: 10px;">
@@ -73,22 +73,21 @@
 								>
 								<Text
 									>{option.articleTitle
-										? truncate(option.articleTitle)
-										: truncate(option.searchValue)}</Text
+										? option.articleTitle
+										: option.searchValue}</Text
 								>
 							</Chip>
 							<Chip chip="{{}}touch" style="margin-top: 10px;">
 								<LeadingIcon class="material-icons">event</LeadingIcon>
-								<Text>{truncate(option.stringDate)}</Text>
+								<Text>{option.stringDate}</Text>
 							</Chip>
 							{#if option.meta.sectionTitle}
 								<Chip
 									chip="{{}}touch"
-									style="max-width: 250px; margin-top: 10px;
-							overflow: hidden;"
+									style="max-width: 90%; margin-top: 10px;"
 								>
 									<LeadingIcon class="material-icons">category</LeadingIcon>
-									<Text>{truncate(option.meta.sectionTitle)}</Text>
+									<Text>{option.meta.sectionTitle}</Text>
 								</Chip>
 							{/if}
 						</div>
@@ -97,13 +96,13 @@
 						<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}" />
 						<TimelineConnector style="background-color: #{getColorByTitle(option.articleTitle)}"/>
 					</TimelineSeparator>
-					<TimelineContent>
+					<TimelineContent style="width: 45%">
 						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em;">{option.sentence}</h3>
 					</TimelineContent>
 				</TimelineItem>
 		{/each}
 	</Timeline>
 {/if}
-
+<SearchMultiple></SearchMultiple>
 <style>
 </style>

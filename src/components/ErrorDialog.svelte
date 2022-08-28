@@ -7,13 +7,7 @@
   <Label slot="label">
     Oh no! We're having some trouble finding that for you.
   </Label>
-  <Button style="color:white; float:right;" slot="actions">Try again</Button>
+  <Button style="color:white; float:right;" slot="actions">Close</Button>
 </Banner>
 
-
-<style>
-
-.mdc-banner__content {
-    max-width: 100%;
-}
-</style>
+<style></style>

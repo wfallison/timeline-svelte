@@ -5,7 +5,6 @@
 	import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
 
-
 	/* SMUI Components (Can this be condensed?) */
 	import Autocomplete from '@smui-extra/autocomplete';
 	import Button, { Group, Label } from '@smui/button';
@@ -58,7 +57,7 @@
 		searchArray = searchArray;
 	};
 
-	const makeRequest = async function () {
+	export const makeRequest = async function () {
 		
 		$loading = true;
 		open = false;

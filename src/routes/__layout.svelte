@@ -36,9 +36,9 @@
 		<Section>
 			<Title>WTL</Title>
 		</Section>
-		<Section id="searchMultiple">
+		<!-- <Section id="searchMultiple">
 			<SearchMultiple></SearchMultiple>
-		</Section>
+		</Section> -->
 		<Section align="end" toolbar>
 			<IconButton 
 				aria-label="Toggle between light and dark mode" 

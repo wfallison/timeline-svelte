@@ -25,7 +25,7 @@ body {
 }
 
 .mdc-banner__content {
-  max-width: 100%;
+  max-width: 100% !important;
 }
 
 body.mdc-dialog-scroll-lock {
