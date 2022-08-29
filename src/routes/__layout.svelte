@@ -10,6 +10,7 @@
 	import Search from '../components/Search.svelte';
 	import SearchMultiple from '../components/SearchMultiple.svelte'
 	import SplashDialog from '../components/SplashDialog.svelte'
+  import Collections from '../components/Collections.svelte'
 
 
 	let topAppBar: TopAppBarComponentDev;
@@ -34,7 +35,7 @@
 <TopAppBar bind:this={topAppBar} variant="standard">
 	<Row>
 		<Section>
-			<Title>WTL</Title>
+			<Collections/>
 		</Section>
 		<!-- <Section id="searchMultiple">
 			<SearchMultiple></SearchMultiple>
