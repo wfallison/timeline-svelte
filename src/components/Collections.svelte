@@ -14,6 +14,8 @@
   import Select, { Option } from '@smui/select';
   import IconButton from '@smui/icon-button';
   import watcher from '../lib/watcher'
+  import { articleResults, loading, searchCriteria, err } from '../stores';
+
   // import LoremIpsum from '$lib/LoremIpsum.svelte';
 
   const i = watcher(0, watchFunction)
@@ -45,6 +47,25 @@
     currentPage = lastPage
 	}
 
+  async function selectCollectionItem(collectionItem){
+    open = false;
+    $loading = true;
+    await fetch(`${process.env.API_URL}/api/w`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(collectionItem.collectionItems)
+		}).then(async (data) => {
+			const results = await data.json();
+			$articleResults = results;
+			$loading = false;
+		}).catch((error) => {
+       $err = true;
+    });
+  }
+
   async function getCollections(rowsPerPage:number, currentPage:number) {
 
     let collectionsArr = [];
@@ -61,6 +82,7 @@
 			results.result.map((el: any) => {
 				collectionsArr.push({
             collectionName: el.collectionName,
+            collectionItems: el.collectionItems,
             countItems: el.collectionItems.length
             }
           )
@@ -96,8 +118,7 @@
   aria-describedby="large-scroll-content"
   surface$style="width: 850px; max-width: calc(100vw - 32px);"
 >
-  <Title id="large-scroll-title">Open a collection</Title>
-  <Content id="large-scroll-content">
+  <Content style="padding:0px;" id="large-scroll-content">
     <DataTable table$aria-label="Collection List" style="width: 100%;">
         <Head>
           <Row>
@@ -107,7 +128,7 @@
         </Head>
         <Body>
         {#each collections as collectionItem}
-        <Row>
+        <Row on:click={selectCollectionItem(collectionItem)}>
           <Cell>{collectionItem.collectionName}</Cell>
           <Cell numeric>{collectionItem.countItems}</Cell>
         </Row>
@@ -157,11 +178,11 @@
       </Pagination>
     </DataTable>
   </Content>
-  <Actions>
+  <!-- <Actions>
     <Button action="accept">
       <Label>Done</Label>
     </Button>
-  </Actions>
+  </Actions> -->
 </Dialog>
 
 <div class="flexy">
