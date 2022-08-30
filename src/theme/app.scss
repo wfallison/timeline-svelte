@@ -16,6 +16,32 @@ body {
 	width:-webkit-fill-available;
 }
 
+.mdc-text-field {
+  width: 95%;
+}
+
+// .mdc-line-ripple{
+//   width: 110% !important;
+// }
+
+.mdc-line-ripple--active{
+  width: 95% !important;
+  //transform: scaleX(1) !important;
+  transform-origin: 5px center !important;
+}
+
+// .mdc-line-ripple .mdc-line-ripple--active{
+//   width: 110% !important;;
+//   //transform: scaleX(1) !important;
+//   transform-origin: 5px center !important;
+// }
+
+// .mdc-text-field--focused, label{
+//   width: 110% !important;
+//   transform-origin: 5px center !important;
+// }
+
+
 // .mdc-top-app-bar {
 // 	background-color: #8CBA80;
 // }
@@ -44,9 +70,9 @@ body.mdc-dialog-scroll-lock {
 	height:-webkit-fill-available;
 }
 
-.mdc-text-field--label-floating{
-	width: 75% !important;
-}
+// .mdc-text-field--label-floating{
+// 	width: 75% !important;
+// }
 
 .mdc-menu-surface--is-open-below{
 	width:75% !important;

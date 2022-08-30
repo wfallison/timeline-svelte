@@ -95,6 +95,7 @@
        $err = true;
     });
 	};
+  
 	let counter = 0;
 	async function searchItems(input: string) {
 		if (input === '') {

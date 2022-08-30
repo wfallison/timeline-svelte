@@ -3,6 +3,7 @@
   import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Button, { Label } from '@smui/button';
   import Fab, { Icon } from '@smui/fab';
+  import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
   import DataTable, {
     Head,
@@ -58,6 +59,7 @@
 			},
 			body: JSON.stringify(collectionItem.collectionItems)
 		}).then(async (data) => {
+      //$searchCriteria = collectionItem.collectionItems;
 			const results = await data.json();
 			$articleResults = results;
 			$loading = false;
@@ -111,7 +113,7 @@
   }
 
 </script>
-
+<div out:fade>
 <Dialog
   bind:open
   aria-labelledby="large-scroll-title"
@@ -184,7 +186,7 @@
     </Button>
   </Actions> -->
 </Dialog>
-
+</div>
 <div class="flexy">
   <div class="margins">
     <Button on:click={() => (open = true)} mini>
