@@ -65,21 +65,21 @@
 				<TimelineItem>
 					<TimelineOppositeContent slot="opposite-content" style="font-size:16px; width: 20px">
 						<div>
-							<h3 style="font-size:20px; margin-bottom: 0px;">{option.stringDate}</h3>
+							<h3 style="font-size:20px; margin-bottom: 0px;">{option.stringDate || 'Invalid Option'}</h3>
 							<Chip chip="{{}}touch" style="margin-top: 10px;">
 								<LeadingIcon
 									class="material-icons"
-									style="color:#{getColorByTitle(option.articleTitle)};">discount</LeadingIcon
+									style="color:#{getColorByTitle(option.articleTitle)  || 'Invalid Option'};">discount</LeadingIcon
 								>
 								<Text
 									>{option.articleTitle
 										? option.articleTitle
-										: option.searchValue}</Text
+										: option.searchValue  || 'Invalid Option'}</Text
 								>
 							</Chip>
 							<Chip chip="{{}}touch" style="margin-top: 10px;">
 								<LeadingIcon class="material-icons">event</LeadingIcon>
-								<Text>{option.stringDate}</Text>
+								<Text>{option.stringDate  || 'Invalid Option'}</Text>
 							</Chip>
 							{#if option.meta.sectionTitle}
 								<Chip
@@ -87,17 +87,17 @@
 									style="max-width: 90%; margin-top: 10px;"
 								>
 									<LeadingIcon class="material-icons">category</LeadingIcon>
-									<Text>{option.meta.sectionTitle}</Text>
+									<Text>{option.meta.sectionTitle  || 'Invalid Option'}</Text>
 								</Chip>
 							{/if}
 						</div>
 					</TimelineOppositeContent>
 					<TimelineSeparator>
-						<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle)}" />
-						<TimelineConnector style="background-color: #{getColorByTitle(option.articleTitle)}"/>
+						<TimelineDot style="background-color: #{getColorByTitle(option.articleTitle  || 'Invalid Option')}" />
+						<TimelineConnector style="background-color: #{getColorByTitle(option.articleTitle  || 'Invalid Option')}"/>
 					</TimelineSeparator>
 					<TimelineContent style="width: 45%">
-						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em; word-break: break-all;">{option.sentence}</h3>
+						<h3 class = "timelineContent" style="margin-bottom:0px; margin-top: 1.5em; word-break: break-all;">{option.sentence  || 'Invalid Option'}</h3>
 					</TimelineContent>
 				</TimelineItem>
 		{/each}
