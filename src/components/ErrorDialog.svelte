@@ -2,7 +2,7 @@
   import Banner, { Label } from '@smui/banner';
   import Button from '@smui/button';
 
-  export let export let errMessage;
+  export let errMessage;
 
 </script>
 <Banner open fixed mobileStacked content$style="max-width: max-content;">
