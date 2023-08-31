@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { articleResults, loading, searchCriteria, err } from '../stores';
+	import { articleResults, loading, searchCriteria, err, errMsg } from '../stores';
   import { goto } from "$app/navigation";
 	import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
@@ -89,10 +89,13 @@
 			body: JSON.stringify(searchArray)
 		}).then(async (data) => {
 			const results = await data.json();
+      console.log('results', results)
 			$articleResults = results;
 			$loading = false;
 		}).catch((error) => {
+       console.log('error', error)
        $err = true;
+       $errMsg = error;
     });
 	};
   

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { articleResults, loading, uniqueTitlesAndColors, err } from '../stores';
+	import { articleResults, loading, uniqueTitlesAndColors, err, errMsg } from '../stores';
 	import LinearProgress from '@smui/linear-progress';
 
 	import SearchResultHeader from '../components/SearchResultHeader.svelte';
@@ -22,6 +22,7 @@
 	let titlesAndColorsData: Array<string>;
 	let isLoading: boolean = false;
   let hasErrors: boolean = false;
+  let errorMessage: any;
 
 	articleResults.subscribe((value) => {
 		timeLineData = value;
@@ -34,6 +35,10 @@
 	err.subscribe((value) => {
 		hasErrors = value;
 	});
+
+  errMsg.subscribe((value) => {
+    errorMessage = value;
+  });
 
 	uniqueTitlesAndColors.subscribe((value) => {
 		titlesAndColorsData = value;
@@ -55,7 +60,7 @@
 {/if}
 
 {#if hasErrors == true}
-  <ErrorDialog></ErrorDialog>
+  <ErrorDialog errMessage=errorMessage></ErrorDialog>
 {/if}
 
 {#if timeLineData && isLoading == false}
