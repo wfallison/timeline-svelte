@@ -59,6 +59,7 @@
 			},
 			body: JSON.stringify(collectionItem.collectionItems)
 		}).then(async (data) => {
+      //$searchCriteria = collectionItem.collectionItems;
 			const results = await data.json();
 			$articleResults = results;
 			$loading = false;
@@ -67,17 +68,9 @@
     });
   }
 
-  type Collection = [
-    {
-      collectionName: String,
-      collectionItems: Array<String>,
-      countItems: Number
-    }
-  ]
-
   async function getCollections(rowsPerPage:number, currentPage:number) {
 
-    let collectionsArr : Partial<Collection>;
+    let collectionsArr = [];
 
 		await fetch(`${process.env.API_URL}/api/collections?page=${currentPage}`, {
 			method: 'GET',
